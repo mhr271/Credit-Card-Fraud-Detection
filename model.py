@@ -50,3 +50,11 @@ lr_results = pd.DataFrame(
              "Test f1", "Test PR-Auc", "Test ConfusionMatrix"],
 )
 print(lr_results)
+
+rf = Pipeline(
+    steps=[
+        ('model',RandomForestClassifier(n_estimators=30,max_depth=10,class_weight='balanced',random_state=42,n_jobs=-1
+         ))
+    ]
+)
+rf.fit(x_train,y_train)
