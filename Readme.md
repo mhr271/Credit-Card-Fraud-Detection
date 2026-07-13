@@ -1,0 +1,40 @@
+# Credit Card Fraud Detection
+
+This is a binary classification model that detects fraudulent credit card transactions using Logistic Regression and Random Forest, evaluated with metrics suited to highly imbalanced data.
+
+## Dataset
+
+- **Source:** [Kaggle - Credit Card Fraud Detection](https://www.kaggle.com/datasets/mlg-ulb/creditcardfraud)
+- **Size:** 284,807 transactions, 31 columns
+- **Features:** `Time`, `Amount`, and `V1`-`V28` (anonymized PCA-transformed features)
+- **Target:** `Class` (0 = legitimate, 1 = fraud)
+- **Class imbalance:** Only 492 transactions (~0.17%) are fraudulent
+
+> **Note:** The dataset (`creditcard.csv`) is not included in this repo due to its size. Download it directly from the Kaggle link above and place it in the project root before running the code.
+
+
+## Approach
+
+1. **Models**
+   - **Logistic Regression** — `class_weight='balanced'`, `max_iter=1000`
+   - **Random Forest** — `n_estimators=30`, `max_depth=10`, `class_weight='balanced'`
+
+2. **Evaluation**
+   - F1, PR-AUC, and confusion matrix computed on both train and test sets for each model
+
+## Results
+
+| Model | Test F1 | Test PR-AUC | Test Confusion Matrix |
+|---|---|---|---|
+| Logistic Regression | 0.114 | 0.719 | [[55478, 1386], [8, 90]] |
+| Random Forest | 0.806 | 0.966 | [[56842, 22], [17, 81]] |
+
+**Random Forest significantly outperforms Logistic Regression.** Logistic Regression catches most fraud (recall ~92%) but generates a large number of false alarms (precision ~6%), making it impractical for real-world use. Random Forest strikes a much better balance — catching ~83% of fraud (81/98) while keeping false alarms low (22 legitimate transactions flagged), for a precision of ~79%.
+
+## Tech Stack
+
+## Requirements
+- Python 3.8+
+- pandas
+- numpy
+- scikit-learn
