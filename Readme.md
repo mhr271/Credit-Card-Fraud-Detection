@@ -29,7 +29,7 @@ This is a binary classification model that detects fraudulent credit card transa
 | Logistic Regression | 0.114 | 0.719 | [[55478, 1386], [8, 90]] |
 | Random Forest | 0.806 | 0.966 | [[56842, 22], [17, 81]] |
 
-**Random Forest significantly outperforms Logistic Regression.** Logistic Regression catches most fraud (recall ~92%) but generates a large number of false alarms (precision ~6%), making it impractical for real-world use. Random Forest strikes a much better balance — catching ~83% of fraud (81/98) while keeping false alarms low (22 legitimate transactions flagged), for a precision of ~79%.
+**Random Forest significantly outperforms Logistic Regression.** Logistic Regression catches most fraud (recall ~92%) but generates a large number of false alarms (precision ~6%), making it impractical for real-world use. Random Forest strikes a much better balance  catching ~83% of fraud (81/98) while keeping false alarms low (22 legitimate transactions flagged), for a precision of ~79%.
 
 ## Tech Stack
 
