@@ -31,3 +31,22 @@ lr.fit(x_train,y_train)
 
 lr_y_train_pred = lr.predict(x_train)
 lr_y_test_pred = lr.predict(x_test)
+
+lr_y_train_proba = lr.predict_proba(x_train)[:, 1]
+lr_y_test_proba = lr.predict_proba(x_test)[:, 1]
+
+lr_train_f1 = f1_score(y_train, lr_y_train_pred)
+lr_train_pr_auc = average_precision_score(y_train, lr_y_train_proba)
+lr_train_confusionmatrix = confusion_matrix(y_train, lr_y_train_pred)
+
+lr_test_f1 = f1_score(y_test, lr_y_test_pred)
+lr_test_pr_auc = average_precision_score(y_test, lr_y_test_proba)
+lr_test_confusionmatrix = confusion_matrix(y_test, lr_y_test_pred)
+
+lr_results = pd.DataFrame(
+    [["Logistic Regression", lr_train_f1, lr_train_pr_auc, lr_train_confusionmatrix,
+      lr_test_f1, lr_test_pr_auc, lr_test_confusionmatrix]],
+    columns=["Model", "Train f1", "Train PR-Auc", "Train ConfusionMatrix",
+             "Test f1", "Test PR-Auc", "Test ConfusionMatrix"],
+)
+print(lr_results)
