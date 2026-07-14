@@ -49,7 +49,6 @@ lr_results = pd.DataFrame(
     columns=["Model", "Train f1", "Train PR-Auc", "Train ConfusionMatrix",
              "Test f1", "Test PR-Auc", "Test ConfusionMatrix"],
 )
-print(lr_results)
 
 rf = Pipeline(
     steps=[
@@ -92,6 +91,26 @@ rf_results = pd.DataFrame(
     ]
 )
 
-print(rf_results)
+results = pd.concat(
+    [lr_results.drop(columns=["Train ConfusionMatrix", "Test ConfusionMatrix"]),
+     rf_results.drop(columns=["Train ConfusionMatrix", "Test ConfusionMatrix"])],
+    ignore_index=True
+)
+print(results)
 
+print("\nLogistic Regression - Test Confusion Matrix:\n", lr_test_confusionmatrix)
+print("\nRandom Forest - Test Confusion Matrix:\n", rf_test_confusionmatrix)
+
+fig, ax = plt.subplots(figsize=(8, 6))
+
+PrecisionRecallDisplay.from_predictions(
+    y_test, lr_y_test_proba, name="Logistic Regression", ax=ax
+)
+PrecisionRecallDisplay.from_predictions(
+    y_test, rf_y_test_proba, name="Random Forest", ax=ax
+)
+
+ax.set_title("Precision-Recall Curve: Logistic Regression vs Random Forest")
+plt.savefig("pr_curve.png", dpi=200, bbox_inches="tight")
+plt.show()
 
