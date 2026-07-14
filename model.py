@@ -9,6 +9,7 @@ from sklearn.preprocessing import OneHotEncoder
 from sklearn.compose import ColumnTransformer
 from sklearn.ensemble import RandomForestRegressor
 import matplotlib.pyplot as plt
+from sklearn.metrics import PrecisionRecallDisplay
 
 df = pd.read_csv("creditcard.csv")
 print(df)
